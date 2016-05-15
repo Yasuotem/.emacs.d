@@ -1,0 +1,36 @@
+
+;;; key-binding
+
+(global-set-key (kbd "C-h") 'delete-backward-char)
+
+;;; font
+
+;; フォントサイズ調整
+(global-set-key (kbd "C-<wheel-up>")   '(lambda() (interactive) (text-scale-increase 1)))
+(global-set-key (kbd "C-=")            '(lambda() (interactive) (text-scale-increase 1)))
+(global-set-key (kbd "C-<wheel-down>") '(lambda() (interactive) (text-scale-decrease 1)))
+(global-set-key (kbd "C--")            '(lambda() (interactive) (text-scale-decrease 1)))
+
+;; フォントサイズ リセット
+(global-set-key (kbd "M-0") '(lambda() (interactive) (text-scale-set 0)))
+
+;;; screen
+
+;; フレーム タイトル
+(setq frame-title-format
+      '("emacs " emacs-version (buffer-file-name " - %f")))
+
+;; 初期画面の非表示（有効：t、無効：nil）
+(setq inhibit-startup-message nil)
+(setq inhibit-startup-screen nil)
+
+;; フルスクリーン化
+(set-frame-parameter nil 'fullscreen 'maximized)
+
+;;; emacs-lisp
+
+;; slime
+(setq inferior-lisp-program "sbcl")
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/slime"))
+(require 'slime)
+(slime-setup '(slime-repl slime-fancy slime-banner))
